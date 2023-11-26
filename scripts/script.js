@@ -29,7 +29,7 @@ async function fetchConfig() {
 async function fetchUpcomingMovies() {
   const options = await getAPIToken()
   const res = await fetch(
-    "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_year=2023&primary_release_date.gte=2023-09-05&primary_release_date.lte=2024-12-31&sort_by=popularity.desc",
+    "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_year=2023&primary_release_date.gte=2023-11-01&primary_release_date.lte=2024-12-31&sort_by=popularity.desc",
     options
   );
   const moviesData = await res.json();
