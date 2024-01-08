@@ -1,6 +1,12 @@
 const main = document.querySelector("#main-card");
 const loading = document.querySelector("#loading");
 const youtubeUrl = "https://www.youtube.com/watch?v=";
+
+let watchListStored = JSON.parse(localStorage.getItem("watchList"));
+if (!watchListStored) {
+  watchListStored = [];
+}
+let watchList = [...watchListStored];
 async function getAPIToken() {
   const response = await fetch(
     "https://vn5jmtgrikr32anxjvfetdykci0hekmw.lambda-url.us-east-1.on.aws/"
@@ -97,7 +103,6 @@ async function fetchMovieTrailer(movie_id) {
 //   }
 // }
 async function listUpcomingMovies() {
-  let watchList = [];
   try {
     const config = await fetchConfig();
     const movies = await fetchUpcomingMovies();
@@ -129,10 +134,6 @@ async function listUpcomingMovies() {
       plusButton.textContent = "+";
       plusButton.classList.add("plus-button");
       movieInfo.appendChild(plusButton);
-      plusButton.addEventListener("click", () => {
-        watchList.push(title.textContent);
-        localStorage.setItem("watchList", JSON.stringify(watchList));
-      });
 
       const anchor = document.createElement("a");
       anchor.href = `${youtubeUrl}${trailer}`;
@@ -147,26 +148,22 @@ async function listUpcomingMovies() {
 
       container.appendChild(movieInfo);
 
+      plusButton.addEventListener("click", () => {
+        const movieData = {
+          title: movie.original_title,
+          trailerLink: `${youtubeUrl}${trailer}`
+        };
+        watchList.push(movieData);
+        localStorage.setItem("watchList", JSON.stringify(watchList));
+      });
       main.appendChild(container);
     });
 
     loading.classList.remove("showLoading");
     loading.classList.add("hideLoading");
-    showWatchList();
   } catch (error) {
     console.error("Error fetching data:", error);
     loading.classList.remove("showLoading");
   }
 }
 listUpcomingMovies();
-
-function showWatchList() {
-  let watchList = JSON.parse(localStorage.getItem("watchList"));
-  let watchListContainer = document.querySelector("#watch-list-container");
-  watchListContainer.innerHTML = "";
-  watchList.forEach((movie) => {
-    let movieTitle = document.createElement("p");
-    movieTitle.textContent = movie;
-    watchListContainer.appendChild(movieTitle);
-  });
-}

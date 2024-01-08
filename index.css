@@ -112,3 +112,11 @@ hr {
   background-color: #312850;
   color: #000;
 }
+
+.toWatchList {
+  text-align: right;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 20px;
+  margin: 0 5px;
+}
