@@ -9,12 +9,12 @@ html::-webkit-scrollbar-track {
 
 html::-webkit-scrollbar-thumb {
   background: rgb(177, 177, 177);
-  border: 3px solid rgb(33, 15, 54);
+  border: 5px solid rgb(33, 15, 54);
 }
 
 html::-webkit-scrollbar-thumb:hover {
   background: rgb(102, 102, 102);
-  border: 3px solid rgb(33, 15, 54);
+  border: 5px solid rgb(33, 15, 54);
 }
 body {
   background-color: #312850;
@@ -96,4 +96,19 @@ footer {
 
 hr {
   margin: 10px 0px;
+}
+
+.plus-button {
+  background-color: #312850;
+  border: 0;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 20px;
+  font-style: bold;
+  cursor: pointer;
+  margin: 0 5px;
+}
+.plus-button:hover {
+  background-color: #312850;
+  color: #000;
 }
